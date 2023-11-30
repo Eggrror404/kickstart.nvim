@@ -8,25 +8,6 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
-  {
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
-    },
-  },
-
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -45,6 +26,7 @@ return {
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
+
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -85,32 +67,23 @@ return {
   },
 
   {
-    'catppuccin/nvim',
-    priority = 1000,
-    opts = {
-      flavour = "macchiato",
-      transparent_background = true,
-      custom_highlights = function(colors)
-        return {
-          Whitespace = { fg = colors.flamingo },
-        }
-      end,
-    },
-    config = function()
-      vim.cmd.colorscheme 'catppuccin-macchiato'
-    end,
-  },
-
-  {
     'stevearc/oil.nvim',
-    opts = {},
+    opts = {
+      keymaps = {
+        ['<Esc>'] = 'actions.close',
+      },
+      float = {
+        max_with = 80,
+        max_height = 50
+      }
+    },
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   {
     'rcarriga/nvim-notify',
-    config = function ()
+    config = function()
       vim.notify = require("notify")
     end,
   },
