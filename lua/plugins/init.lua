@@ -171,6 +171,30 @@ return {
       ignored_buftypes = { "nofile" },
     }
   },
+
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/nvim-cmp"
+    },
+    opts = {
+      check_ts = true,
+      ts_config = { java = false },
+      fast_wrap = {},
+    },
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+
+      -- If you want insert `(` after select function or method item
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
+    end
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
