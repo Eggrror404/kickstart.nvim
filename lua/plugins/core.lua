@@ -70,7 +70,7 @@ return {
     'stevearc/oil.nvim',
     opts = {
       keymaps = {
-        ['<Esc>'] = 'actions.close',
+        ['q'] = 'actions.close',
       },
       float = {
         max_with = 80,
@@ -83,7 +83,11 @@ return {
 
   {
     'rcarriga/nvim-notify',
-    config = function()
+    opts = {
+      background_colour = "#000000"
+    },
+    config = function(_, opts)
+      require("notify").setup(opts)
       vim.notify = require("notify")
     end,
   },
@@ -146,15 +150,6 @@ return {
         pcall(require('telescope').load_extension, 'fzf')
       end
     },
-  },
-
-  {
-    -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    build = ':TSUpdate',
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
