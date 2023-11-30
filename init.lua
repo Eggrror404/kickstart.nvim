@@ -67,6 +67,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   { import = 'plugins' },
 }, {
+  install = { colorscheme = { "catppuccin" } },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json"
 })
 

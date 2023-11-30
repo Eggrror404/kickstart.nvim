@@ -152,6 +152,25 @@ return {
     },
   },
 
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      open_mapping = [[<F7>]],
+      direction = "float",
+      float_opts = {
+        border = "rounded",
+      },
+    }
+  },
+
+  {
+    'mrjones2014/smart-splits.nvim',
+    opts = {
+      ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
+      ignored_buftypes = { "nofile" },
+    }
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
