@@ -38,7 +38,17 @@ return {
   {
     'folke/which-key.nvim',
     event = "VeryLazy",
-    opts = {}
+    opts = {},
+    config = function(_, opts)
+      require('which-key').setup(opts)
+
+      -- document existing key chains
+      require('which-key').register {
+        ['<leader>f'] = { name = "Telescope find" },
+        ['<leader>g'] = { name = 'Git' },
+        ['<leader>l'] = { name = 'LSP' },
+      }
+    end
   },
 
   {
@@ -153,7 +163,7 @@ return {
     "akinsho/toggleterm.nvim",
     version = "*",
     event = "VeryLazy",
-    keymaps = {
+    keys = {
       { '<leader>tf', '<cmd>ToggleTerm<cr>',                      desc = 'Floating terminal session' },
       { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>',   desc = 'Vertical terminal session' },
       { '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', desc = 'Horizontal terminal session' },
