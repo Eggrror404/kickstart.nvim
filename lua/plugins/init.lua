@@ -20,7 +20,7 @@ return {
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
-    event = "BufEnter",
+    event = "InsertEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -44,9 +44,10 @@ return {
 
       -- document existing key chains
       require('which-key').register {
-        ['<leader>f'] = { name = "Telescope find" },
+        ['<leader>f'] = { name = "Telescope Find" },
         ['<leader>g'] = { name = 'Git' },
         ['<leader>l'] = { name = 'LSP' },
+        ['<leader>t'] = { name = 'Terminal' },
       }
     end
   },
@@ -65,7 +66,7 @@ return {
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
