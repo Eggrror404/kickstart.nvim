@@ -31,6 +31,9 @@ return {
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+
+      -- Adds icons for completion items
+      'onsails/lspkind.nvim'
     },
   },
 
@@ -56,6 +59,10 @@ return {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     event = "BufEnter",
+    keys = {
+      { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = 'Preview git hunk' },
+      { "<leader>ga", "<cmd>Gitsigns add<cr>",          desc = 'Add git hunk' }
+    },
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -66,8 +73,6 @@ return {
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
         vim.keymap.set({ 'n', 'v' }, ']c', function()
@@ -89,6 +94,22 @@ return {
           return '<Ignore>'
         end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
+    },
+  },
+
+  {
+    'chrisgrieser/nvim-tinygit',
+    ft = { "gitrebase", "gitcommit" },
+    keys = {
+      { "<leader>gc", function() require('tinygit').smartCommit() end,  desc = "Smart Commit" },
+      { "<leader>gp", function() require('tinygit').push() end,         desc = "Push" },
+      { "<leader>gA", function() require('tinygit').amendOnlyMsg() end, desc = "Amend last message" },
+      { "<leader>gs", function() require('tinygit').stashPush() end,    desc = "Stash push" },
+      { "<leader>gS", function() require('tinygit').stashPop() end,     desc = "Stash pop" },
+    },
+    dependencies = {
+      { "stevearc/dressing.nvim", opt = { input = { insert_only = false } } },
+      "rcarriga/nvim-notify", -- optional, but recommended
     },
   },
 
