@@ -3,6 +3,8 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
+    event = "VeryLazy",
+    cmd = "Telescope",
     dependencies = {
       'nvim-lua/plenary.nvim',
       "debugloop/telescope-undo.nvim",

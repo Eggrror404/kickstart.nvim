@@ -1,17 +1,26 @@
 return {
   -- NOTE: First, some plugins that don't require any configuration
 
-  -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  {
+    'tpope/vim-fugitive',
+    event = "BufEnter",
+    cmd = "Git"
+  },
 
-  "NMAC427/guess-indent.nvim",
+  {
+    "NMAC427/guess-indent.nvim",
+    event = "BufEnter"
+  },
 
-  "ahmedkhalf/project.nvim",
+  {
+    "ahmedkhalf/project.nvim",
+    event = "BufEnter"
+  },
 
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
+    event = "BufEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -26,11 +35,16 @@ return {
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  {
+    'folke/which-key.nvim',
+    event = "VeryLazy",
+    opts = {}
+  },
 
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = "BufEnter",
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -69,7 +83,8 @@ return {
 
   {
     'stevearc/oil.nvim',
-    keymaps = {
+    lazy = false,
+    keys = {
       { '<leader>e', function() require('oil').toggle_float() end, desc = 'Oil file explorer' },
     },
     opts = {
@@ -87,6 +102,8 @@ return {
 
   {
     'rcarriga/nvim-notify',
+    event = "VeryLazy",
+    cmd = "Notifications",
     opts = {
       background_colour = "#000000"
     },
@@ -99,6 +116,7 @@ return {
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
     -- See `:help lualine.txt`
     opts = {
       options = {
@@ -113,6 +131,7 @@ return {
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
+    event = "BufEnter",
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
@@ -122,6 +141,7 @@ return {
   -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
+    event = "BufEnter",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     opts = function()
       return { pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook() }
@@ -132,6 +152,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    event = "VeryLazy",
     keymaps = {
       { '<leader>tf', '<cmd>ToggleTerm<cr>',                      desc = 'Floating terminal session' },
       { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>',   desc = 'Vertical terminal session' },
@@ -148,6 +169,7 @@ return {
 
   {
     'mrjones2014/smart-splits.nvim',
+    event = "BufEnter",
     opts = {
       ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
       ignored_buftypes = { "nofile" },
@@ -176,6 +198,19 @@ return {
         cmp_autopairs.on_confirm_done()
       )
     end
+  },
+
+  {
+    'NvChad/nvim-colorizer.lua',
+    event = "BufEnter",
+    opts = {
+      user_default_options = {
+        names = false,
+        RRGGBBAA = true,
+        rgb_fn = true,
+        hsl_fn = true
+      }
+    }
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart

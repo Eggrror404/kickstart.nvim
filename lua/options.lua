@@ -3,8 +3,8 @@
 -- NOTE: You can change these options as you wish!
 
 -- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
