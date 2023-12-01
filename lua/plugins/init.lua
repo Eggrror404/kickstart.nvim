@@ -5,8 +5,9 @@ return {
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  "NMAC427/guess-indent.nvim",
+
+  "ahmedkhalf/project.nvim",
 
   {
     -- Autocompletion
@@ -168,6 +169,7 @@ return {
       )
     end
   },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.

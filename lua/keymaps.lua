@@ -62,3 +62,4 @@ vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
   { desc = 'Search Diagnostics' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = 'Search Resume' })
+vim.keymap.set('n', '<leader>fp', require('telescope').extensions.projects.projects, { desc = 'Recent projects' })

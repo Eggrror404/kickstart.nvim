@@ -9,6 +9,14 @@ vim.wo.relativenumber = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- Disable warping
+vim.o.wrap = false
+
+-- Tab width set to 2
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
