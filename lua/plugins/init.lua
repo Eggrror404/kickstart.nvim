@@ -69,6 +69,9 @@ return {
 
   {
     'stevearc/oil.nvim',
+    keymaps = {
+      { '<leader>e', function() require('oil').toggle_float() end, desc = 'Oil file explorer' },
+    },
     opts = {
       keymaps = {
         ['q'] = 'actions.close',
@@ -129,6 +132,11 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    keymaps = {
+      { '<leader>tf', '<cmd>ToggleTerm<cr>',                      desc = 'Floating terminal session' },
+      { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>',   desc = 'Vertical terminal session' },
+      { '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', desc = 'Horizontal terminal session' },
+    },
     opts = {
       open_mapping = [[<F7>]],
       direction = "float",

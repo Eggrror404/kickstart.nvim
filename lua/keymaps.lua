@@ -27,9 +27,6 @@ set('n', "<C-Down>", require("smart-splits").resize_down, { desc = "Resize split
 set('n', "<C-Left>", require("smart-splits").resize_left, { desc = "Resize split left" })
 set('n', "<C-Right>", require("smart-splits").resize_right, { desc = "Resize split right" })
 
--- Oil.nvim file explorer
-set('n', '<leader>e', require('oil').toggle_float, { desc = 'Oil file explorer' })
-
 -- Comment.nvim
 set("n", "<leader>/", function()
   require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
@@ -38,28 +35,9 @@ set("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.
   { desc = "Toggle comment for selection" })
 
 -- Terminal
-set('n', '<leader>tf', '<cmd>ToggleTerm<cr>', { desc = 'Floating terminal session' })
-set('n', '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>', { desc = 'Vertical terminal session' })
-set('n', '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', { desc = 'Horizontal terminal session' })
-
 set('t', "<C-h>", "<cmd>wincmd h<cr>", { desc = "Move to left split" })
 set('t', "<C-j>", "<cmd>wincmd j<cr>", { desc = "Move to below split" })
 set('t', "<C-k>", "<cmd>wincmd k<cr>", { desc = "Move to above split" })
 set('t', "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to right split" })
 set('t', "<C-w>", [[<C-\><C-n><C-w>]], { desc = "Wincmd" })
 set('t', "<C-n>", [[<C-\><C-n>]], { desc = "Normal mode" })
-
--- Telescope
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles,
-  { desc = 'Find recently opened files' })
-vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers,
-  { desc = 'Find existing buffers' })
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Search Files' })
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
-vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
-  { desc = 'Search Diagnostics' })
-vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = 'Search Resume' })
-vim.keymap.set('n', '<leader>fp', require('telescope').extensions.projects.projects, { desc = 'Recent projects' })
