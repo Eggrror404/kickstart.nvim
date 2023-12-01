@@ -18,17 +18,17 @@ set('n', '<leader>dm', vim.diagnostic.open_float, { desc = 'Open floating diagno
 set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Window navigation
-set('n', "<C-h>", function() require("smart-splits").move_cursor_left() end, { desc = "Move to left split" })
-set('n', "<C-j>", function() require("smart-splits").move_cursor_down() end, { desc = "Move to below split" })
-set('n', "<C-k>", function() require("smart-splits").move_cursor_up() end, { desc = "Move to above split" })
-set('n', "<C-l>", function() require("smart-splits").move_coursor_right() end, { desc = "Move to right split" })
-set('n', "<C-Up>", function() require("smart-splits").resize_up() end, { desc = "Resize split up" })
-set('n', "<C-Down>", function() require("smart-splits").resize_down() end, { desc = "Resize split down" })
-set('n', "<C-Left>", function() require("smart-splits").resize_left() end, { desc = "Resize split left" })
-set('n', "<C-Right>", function() require("smart-splits").resize_right() end, { desc = "Resize split right" })
+set('n', "<C-h>", require("smart-splits").move_cursor_left, { desc = "Move to left split" })
+set('n', "<C-j>", require("smart-splits").move_cursor_down, { desc = "Move to below split" })
+set('n', "<C-k>", require("smart-splits").move_cursor_up, { desc = "Move to above split" })
+set('n', "<C-l>", require("smart-splits").move_cursor_right, { desc = "Move to right split" })
+set('n', "<C-Up>", require("smart-splits").resize_up, { desc = "Resize split up" })
+set('n', "<C-Down>", require("smart-splits").resize_down, { desc = "Resize split down" })
+set('n', "<C-Left>", require("smart-splits").resize_left, { desc = "Resize split left" })
+set('n', "<C-Right>", require("smart-splits").resize_right, { desc = "Resize split right" })
 
 -- Oil.nvim file explorer
-set('n', '<leader>e', function() require('oil').toggle_float() end, { desc = 'Oil file explorer' })
+set('n', '<leader>e', require('oil').toggle_float, { desc = 'Oil file explorer' })
 
 -- Comment.nvim
 set("n", "<leader>/", function()
@@ -51,17 +51,14 @@ set('t', "<C-n>", [[<C-\><C-n>]], { desc = "Normal mode" })
 
 -- Telescope
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>fo', function() require('telescope.builtin').oldfiles() end,
+vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles,
   { desc = 'Find recently opened files' })
-vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end,
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers,
   { desc = 'Find existing buffers' })
-vim.keymap.set('n', '<leader>fg', function() require('telescope.builtin').git_files() end, { desc = 'Search Git Files' })
-vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = 'Search Files' })
-vim.keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = 'Search Help' })
-vim.keymap.set('n', '<leader>fw', function() require('telescope.builtin').grep_string() end,
-  { desc = 'Search current Word' })
-vim.keymap.set('n', '<leader>fW', function() require('telescope.builtin').live_grep() end, { desc = 'Search by Grep' })
-vim.keymap.set('n', '<leader>fG', ':LiveGrepGitRoot<cr>', { desc = 'Search by Grep on Git Root' })
-vim.keymap.set('n', '<leader>fd', function() require('telescope.builtin').diagnostics() end,
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Search Files' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Search Help' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc = 'Search by Grep' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
   { desc = 'Search Diagnostics' })
-vim.keymap.set('n', '<leader>fr', function() require('telescope.builtin').resume() end, { desc = 'Search Resume' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = 'Search Resume' })
