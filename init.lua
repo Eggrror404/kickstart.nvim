@@ -74,7 +74,3 @@ require('lazy').setup({
 require("options")
 require("keymaps")
 require("autocommands")
-
-require("include.lsp-setup")
-require("include.cmp-setup")
-require("include.treesitter-setup")

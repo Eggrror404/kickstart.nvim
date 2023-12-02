@@ -14,27 +14,10 @@ return {
 
   {
     "ahmedkhalf/project.nvim",
-    event = "BufEnter"
-  },
-
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    event = "InsertEnter",
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-
-      -- Adds icons for completion items
-      'onsails/lspkind.nvim'
-    },
+    event = "BufEnter",
+    config = function(_, opts)
+      require("project_nvim").setup(opts)
+    end
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -243,6 +226,11 @@ return {
         hsl_fn = true
       }
     }
+  },
+
+  {
+    "h-hg/fcitx.nvim",
+    event = "InsertEnter"
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
