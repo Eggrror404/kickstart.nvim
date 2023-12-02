@@ -44,9 +44,11 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
+-- Import other options
+require("options")
+
+-- Install `lazy.nvim` plugin manager
+-- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -70,7 +72,6 @@ require('lazy').setup({
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json"
 })
 
--- [[ Require other modules ]]
-require("options")
+-- Require other modules
 require("keymaps")
 require("autocommands")

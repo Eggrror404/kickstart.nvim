@@ -22,7 +22,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<M-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
@@ -43,8 +43,9 @@ return {
     event = "BufEnter",
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim',           config = true },
-      { 'williamboman/mason-lspconfig.nvim', config = true },
+      { 'williamboman/mason.nvim',     config = true },
+      'williamboman/mason-lspconfig.nvim',
+      { 'jay-babu/mason-null-ls.nvim', dependencies = { "nvimtools/none-ls.nvim" } },
 
       -- Useful status updates for LSP
       {
@@ -72,6 +73,10 @@ return {
             -- diagnostics = { disable = { 'missing-fields' } },
           },
         },
+      },
+      null_ls = {
+        stylua = {},
+        shfmt = { extra_args = { "-i", "2", "-ci" } }
       }
     },
     config = function(_, opts)
@@ -95,6 +100,26 @@ return {
             filetypes = (opts.servers[server_name] or {}).filetypes,
           }
         end,
+      }
+
+      local null_ls = require("null-ls")
+      local mason_null_ls = require("mason-null-ls")
+
+      null_ls.setup()
+      mason_null_ls.setup {
+        ensure_installed = vim.tbl_keys(opts.null_ls),
+        automatic_installation = true,
+        handlers = {
+          -- function from mason-null-ls github
+          -- https://github.com/jay-babu/mason-null-ls.nvim/blob/d1f7258f80867f718d643d88eee66959671a4bef/lua/mason-null-ls/automatic_setup.lua
+          function(source_name, methods)
+            if not null_ls.is_registered(source_name) then
+              vim.tbl_map(function(type)
+                null_ls.register(null_ls.builtins[type][source_name].with(opts.null_ls[source_name]))
+              end, methods)
+            end
+          end
+        }
       }
     end
   },
