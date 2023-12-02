@@ -40,44 +40,48 @@ return {
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    event = "BufEnter",
+    event = 'BufEnter',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim',     config = true },
+      'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'jay-babu/mason-null-ls.nvim', dependencies = { "nvimtools/none-ls.nvim" } },
+      'jay-babu/mason-null-ls.nvim',
 
       -- Useful status updates for LSP
       {
         'j-hui/fidget.nvim',
-        opts = { notification = { window = { winblend = 0 } } }
+        opts = { notification = { window = { winblend = 0 } } },
       },
+    },
+  },
 
+  {
+    'williamboman/mason.nvim',
+    config = true,
+  },
+
+  {
+    'williamboman/mason-lspconfig.nvim',
+    dependencies = {
       -- Additional lua configuration, makes nvim stuff amazing!
       { 'folke/neodev.nvim', config = true },
     },
     opts = {
-      servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- tsserver = {},
-        -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+      -- clangd = {},
+      -- gopls = {},
+      -- pyright = {},
+      -- rust_analyzer = {},
+      -- tsserver = {},
+      -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-        lua_ls = {
-          Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-            -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-          },
+      lua_ls = {
+        Lua = {
+          workspace = { checkThirdParty = false },
+          telemetry = { enable = false },
+          -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+          -- diagnostics = { disable = { 'missing-fields' } },
         },
       },
-      null_ls = {
-        stylua = {},
-        shfmt = { extra_args = { "-i", "2", "-ci" } }
-      }
     },
     config = function(_, opts)
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -88,7 +92,7 @@ return {
       local mason_lspconfig = require 'mason-lspconfig'
 
       mason_lspconfig.setup {
-        ensure_installed = vim.tbl_keys(opts.servers),
+        ensure_installed = vim.tbl_keys(opts),
       }
 
       mason_lspconfig.setup_handlers {
@@ -96,18 +100,30 @@ return {
           require('lspconfig')[server_name].setup {
             capabilities = capabilities,
             on_attach = on_attach,
-            settings = opts.servers[server_name],
-            filetypes = (opts.servers[server_name] or {}).filetypes,
+            settings = opts[server_name],
+            filetypes = (opts[server_name] or {}).filetypes,
           }
         end,
       }
+    end,
+  },
 
-      local null_ls = require("null-ls")
-      local mason_null_ls = require("mason-null-ls")
+  {
+    'jay-babu/mason-null-ls.nvim',
+    dependencies = {
+      { 'nvimtools/none-ls.nvim', config = true },
+    },
+    opts = {
+      stylua = {},
+      shfmt = { extra_args = { '-i', '2', '-ci' } },
+    },
+    config = function(_, opts)
+      local null_ls = require 'null-ls'
+      local mason_null_ls = require 'mason-null-ls'
 
       null_ls.setup()
       mason_null_ls.setup {
-        ensure_installed = vim.tbl_keys(opts.null_ls),
+        ensure_installed = vim.tbl_keys(opts),
         automatic_installation = true,
         handlers = {
           -- function from mason-null-ls github
@@ -115,12 +131,12 @@ return {
           function(source_name, methods)
             if not null_ls.is_registered(source_name) then
               vim.tbl_map(function(type)
-                null_ls.register(null_ls.builtins[type][source_name].with(opts.null_ls[source_name]))
+                null_ls.register(null_ls.builtins[type][source_name].with(opts[source_name]))
               end, methods)
             end
-          end
-        }
+          end,
+        },
       }
-    end
+    end,
   },
 }
