@@ -1,6 +1,6 @@
 return {
   {
-    'catppuccin/nvim',
+    "catppuccin/nvim",
     lazy = false,
     priority = 1000,
     opts = {
@@ -11,7 +11,7 @@ return {
         mason = true,
         notify = true,
         which_key = true,
-        treesitter_context = true
+        treesitter_context = true,
       },
       custom_highlights = function(colors)
         return {
@@ -21,7 +21,7 @@ return {
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 }
