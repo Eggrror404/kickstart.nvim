@@ -15,7 +15,6 @@ set("n", "<Esc>", "<cmd>nohl<cr>", { silent = true })
 set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-set("n", "<leader>lD", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Window navigation
 set("n", "<C-h>", require("smart-splits").move_cursor_left, { desc = "Move to left split" })

@@ -83,43 +83,17 @@ return {
   {
     "chrisgrieser/nvim-tinygit",
     ft = { "gitrebase", "gitcommit" },
-    keys = {
-      {
-        "<leader>gc",
-        function()
-          require("tinygit").smartCommit()
-        end,
-        desc = "Smart Commit",
-      },
-      {
-        "<leader>gp",
-        function()
-          require("tinygit").push()
-        end,
-        desc = "Push",
-      },
-      {
-        "<leader>gA",
-        function()
-          require("tinygit").amendOnlyMsg()
-        end,
-        desc = "Amend last message",
-      },
-      {
-        "<leader>gs",
-        function()
-          require("tinygit").stashPush()
-        end,
-        desc = "Stash push",
-      },
-      {
-        "<leader>gS",
-        function()
-          require("tinygit").stashPop()
-        end,
-        desc = "Stash pop",
-      },
-    },
+    keys = function()
+      local tinygit = require("tinygit")
+      return {
+        { "<leader>gc", tinygit.smartCommit, desc = "Smart Commit" },
+        { "<leader>gp", tinygit.push, desc = "Push" },
+        { "<leader>gA", tinygit.amendOnlyMsg, desc = "Amend last message" },
+        { "<leader>gs", tinygit.stashPush, desc = "Stash push" },
+        { "<leader>gS", tinygit.stashPop, desc = "Stash pop" },
+        { "<leader>gh", tinygit.searchFileHistory, desc = "File History" },
+      }
+    end,
     dependencies = {
       { "stevearc/dressing.nvim", opt = { input = { insert_only = false } } },
       "rcarriga/nvim-notify", -- optional, but recommended
@@ -243,9 +217,7 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-    },
+    dependencies = { "hrsh7th/nvim-cmp" },
     opts = {
       check_ts = true,
       ts_config = { java = false },
@@ -277,6 +249,16 @@ return {
   {
     "h-hg/fcitx.nvim",
     event = "InsertEnter",
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    event = "BufEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo comments" },
+    },
+    opts = {},
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
