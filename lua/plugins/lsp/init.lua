@@ -38,14 +38,14 @@ return {
       -- tsserver = {},
       -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-      lua_ls = {
-        Lua = {
-          workspace = { checkThirdParty = false },
-          telemetry = { enable = false },
-          -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-          -- diagnostics = { disable = { 'missing-fields' } },
-        },
-      },
+      -- lua_ls = {
+      --   Lua = {
+      --     workspace = { checkThirdParty = false },
+      --     telemetry = { enable = false },
+      --     -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+      --     -- diagnostics = { disable = { 'missing-fields' } },
+      --   },
+      -- },
     },
     config = function(_, opts)
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -78,7 +78,6 @@ return {
       { "nvimtools/none-ls.nvim", config = true },
     },
     opts = {
-      stylua = {},
       shfmt = { extra_args = { "-i", "2", "-ci" } },
     },
     config = function(_, opts)

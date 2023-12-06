@@ -5,8 +5,7 @@ return {
       if not opts.ensure_installed then
         opts.ensure_installed = {}
       end
-      opts.ensure_installed =
-        vim.list_extend(opts.ensure_installed, { "javascript", "typescript", "tsx", "jsdoc" })
+      vim.list_extend(opts.ensure_installed, { "javascript", "typescript", "tsx", "jsdoc" })
     end,
   },
   {
