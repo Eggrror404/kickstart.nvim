@@ -95,8 +95,16 @@ return {
       }
     end,
     dependencies = {
-      { "stevearc/dressing.nvim", opt = { input = { insert_only = false } } },
+      "stevearc/dressing.nvim",
       "rcarriga/nvim-notify", -- optional, but recommended
+    },
+  },
+
+  {
+    "stevearc/dressing.nvim",
+    event = "BufEnter",
+    opt = {
+      input = { insert_only = false },
     },
   },
 
