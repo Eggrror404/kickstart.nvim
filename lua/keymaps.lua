@@ -4,6 +4,9 @@ local set = vim.keymap.set
 -- See `:help vim.keymap.set()`
 set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
+-- v-split
+set("n", "|", "<cmd>vsplit<cr>", { desc = "Verticle split" })
+
 -- Remap for dealing with word wrap
 set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -44,3 +47,10 @@ set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Move to above split" })
 set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Move to right split" })
 set("t", "<C-w>", [[<C-\><C-n><C-w>]], { desc = "Wincmd" })
 set("t", "<C-n>", [[<C-\><C-n>]], { desc = "Normal mode" })
+
+-- Custom terminal commands
+local Terminal = require("toggleterm.terminal").Terminal
+local gitui = Terminal:new({ cmd = "gitui" })
+set("n", "<leader>tg", function()
+  gitui:toggle()
+end, { desc = "Gitui" })
