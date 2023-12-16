@@ -17,7 +17,7 @@ return {
         opts = { notification = { window = { winblend = 0 } } },
       },
     },
-    config = require("plugins.lsp.lspconfig").lspconfig,
+    config = require("plugins.lsp.lspconfig"),
   },
 
   {

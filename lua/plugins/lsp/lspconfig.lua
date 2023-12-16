@@ -1,4 +1,11 @@
 local function lspconfig()
+  -- From neovim/nvim-lspconfig wiki
+  local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+  for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+
   -- From AstroNvim <3
   vim.diagnostic.config({
     virtual_text = true,
@@ -19,4 +26,4 @@ local function lspconfig()
     vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", silent = true })
 end
 
-return { lspconfig = lspconfig }
+return lspconfig
