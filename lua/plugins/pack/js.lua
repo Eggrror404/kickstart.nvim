@@ -11,7 +11,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      tsserver = {},
+      -- tsserver = {},
     },
   },
   {
