@@ -50,7 +50,15 @@ set("t", "<C-n>", [[<C-\><C-n>]], { desc = "Normal mode" })
 
 -- Custom terminal commands
 local Terminal = require("toggleterm.terminal").Terminal
-local gitui = Terminal:new({ cmd = "gitui" })
-set("n", "<leader>tg", function()
-  gitui:toggle()
-end, { desc = "Gitui" })
+local terms = {
+  {
+    "<leader>tg",
+    Terminal:new({ cmd = "gitui" }),
+    { desc = "Gitui" },
+  },
+}
+for _, v in ipairs(terms) do
+  set("n", v[1], function()
+    v[2]:toggle()
+  end, v[3])
+end
