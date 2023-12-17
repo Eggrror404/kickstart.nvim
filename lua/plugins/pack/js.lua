@@ -11,6 +11,8 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
+      -- my keymaps with lspconfig conflicts with typescript-tools.nvim
+      -- the keymaps get executed twice
       -- tsserver = {},
     },
   },
@@ -31,7 +33,9 @@ return {
       "javascriptreact",
     },
     opts = {
-      expose_as_code_action = "all",
+      settings = {
+        expose_as_code_action = "all",
+      },
     },
   },
 }
