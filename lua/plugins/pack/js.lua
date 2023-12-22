@@ -11,9 +11,8 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      -- my keymaps with lspconfig conflicts with typescript-tools.nvim
-      -- the keymaps get executed twice
-      -- tsserver = {},
+      -- let typescript-tools setup tsserver
+      tsserver = function() end,
     },
   },
   {

@@ -22,7 +22,11 @@ return {
 
   {
     "williamboman/mason.nvim",
-    config = true,
+    opts = {
+      ui = {
+        border = "rounded",
+      },
+    },
   },
 
   {
@@ -32,21 +36,15 @@ return {
       { "folke/neodev.nvim", config = true },
     },
     opts = {
+      -- [server] = {options}
       -- clangd = {},
       -- gopls = {},
       -- pyright = {},
       -- rust_analyzer = {},
-      -- tsserver = {},
       -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
-      -- lua_ls = {
-      --   Lua = {
-      --     workspace = { checkThirdParty = false },
-      --     telemetry = { enable = false },
-      --     -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      --     -- diagnostics = { disable = { 'missing-fields' } },
-      --   },
-      -- },
+      --
+      -- or use a setup function
+      -- tsserver = function() end,
     },
     config = function(_, opts)
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
@@ -62,11 +60,18 @@ return {
 
       mason_lspconfig.setup_handlers({
         function(server_name)
+          local server_opt = opts[server_name] or {}
+
+          if type(server_opt) == "function" then
+            server_opt()
+            return
+          end
+
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
             on_attach = require("plugins.lsp.keymaps").on_attach,
-            settings = opts[server_name],
-            filetypes = (opts[server_name] or {}).filetypes,
+            settings = server_opt,
+            filetypes = server_opt.filetypes,
           })
         end,
       })
