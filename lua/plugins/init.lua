@@ -1,12 +1,4 @@
 return {
-  -- NOTE: First, some plugins that don't require any configuration
-
-  {
-    "tpope/vim-fugitive",
-    event = "BufEnter",
-    cmd = "Git",
-  },
-
   {
     "NMAC427/guess-indent.nvim",
     event = "BufEnter",
@@ -36,68 +28,6 @@ return {
         ["<leader>t"] = { name = "Terminal" },
       })
     end,
-  },
-
-  {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
-    "lewis6991/gitsigns.nvim",
-    event = "BufEnter",
-    keys = {
-      { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview git hunk" },
-      { "<leader>ga", "<cmd>Gitsigns add<cr>", desc = "Add git hunk" },
-    },
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
-      on_attach = function(bufnr)
-        -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ "n", "v" }, "]c", function()
-          if vim.wo.diff then
-            return "]c"
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return "<Ignore>"
-        end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
-        vim.keymap.set({ "n", "v" }, "[c", function()
-          if vim.wo.diff then
-            return "[c"
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return "<Ignore>"
-        end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
-      end,
-    },
-  },
-
-  {
-    "chrisgrieser/nvim-tinygit",
-    ft = { "gitrebase", "gitcommit" },
-    keys = function()
-      local tinygit = require("tinygit")
-      return {
-        { "<leader>gc", tinygit.smartCommit, desc = "Smart Commit" },
-        { "<leader>gp", tinygit.push, desc = "Push" },
-        { "<leader>gA", tinygit.amendOnlyMsg, desc = "Amend last message" },
-        { "<leader>gs", tinygit.stashPush, desc = "Stash push" },
-        { "<leader>gS", tinygit.stashPop, desc = "Stash pop" },
-        { "<leader>gh", tinygit.searchFileHistory, desc = "File History" },
-      }
-    end,
-    dependencies = {
-      "stevearc/dressing.nvim",
-      "rcarriga/nvim-notify", -- optional, but recommended
-    },
   },
 
   {
