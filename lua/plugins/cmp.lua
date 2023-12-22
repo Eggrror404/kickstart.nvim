@@ -16,6 +16,7 @@ return {
 
       -- Adds LSP completion capabilities
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
 
       -- Adds a number of user-friendly snippets
       "rafamadriz/friendly-snippets",
@@ -48,9 +49,9 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<Down>"] = cmp.mapping.select_next_item(),
           ["<Up>"] = cmp.mapping.select_prev_item(),
-          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-Space>"] = cmp.mapping.complete({}),
-          ["<C-u>"] = cmp.mapping.scroll_docs(4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
@@ -77,6 +78,7 @@ return {
         sources = {
           { name = "nvim_lsp" },
           { name = "luasnip" },
+          { name = "path" },
         },
       }
     end,
