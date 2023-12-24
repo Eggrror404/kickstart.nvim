@@ -76,3 +76,4 @@ require("lazy").setup("plugins", {
 -- Require other modules
 require("keymaps")
 require("autocommands")
+require("kickstart.plugins.autoformat")

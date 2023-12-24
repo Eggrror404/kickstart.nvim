@@ -30,3 +30,13 @@ vim.api.nvim_create_autocmd("BufRead", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  once = true,
+  pattern = "oil:///*",
+  callback = function(opts)
+    if vim.bo.filetype == "oil" then
+      vim.cmd.lcd(require("oil").get_current_dir())
+    end
+  end,
+})
