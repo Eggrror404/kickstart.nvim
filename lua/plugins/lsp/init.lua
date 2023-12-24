@@ -69,7 +69,10 @@ return {
 
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
-            on_attach = require("plugins.lsp.keymaps").on_attach,
+            on_attach = function(_, bufnr)
+              require("plugins.lsp.keymaps").setup(bufnr)
+              require("plugins.lsp.autoformat").setup(bufnr)
+            end,
             settings = server_opt,
             filetypes = server_opt.filetypes,
           })
