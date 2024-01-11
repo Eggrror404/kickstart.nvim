@@ -2,7 +2,7 @@ return {
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
-    event = "BufEnter",
+    event = "LazyFile",
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -13,7 +13,7 @@ return {
         changedelete = { text = "~" },
       },
       preview_config = {
-        border = "rounded"
+        border = "rounded",
       },
       on_attach = require("plugins.gitsigns.keymaps").on_attach,
     },

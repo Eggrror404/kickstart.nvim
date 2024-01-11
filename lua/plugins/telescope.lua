@@ -2,8 +2,6 @@ return {
   -- Fuzzy Finder (files, lsp, etc)
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    event = "VeryLazy",
     cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",

@@ -1,12 +1,12 @@
 return {
   {
     "NMAC427/guess-indent.nvim",
-    event = "BufEnter",
+    event = "LazyFile",
   },
 
   {
     "ahmedkhalf/project.nvim",
-    event = "BufEnter",
+    event = "LazyFile",
     config = function(_, opts)
       require("project_nvim").setup(opts)
     end,
@@ -32,7 +32,7 @@ return {
 
   {
     "stevearc/dressing.nvim",
-    event = "BufEnter",
+    event = "VeryLazy",
     opt = {
       input = { insert_only = false },
     },
@@ -94,7 +94,7 @@ return {
   {
     -- Add indentation guides even on blank lines
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufEnter",
+    event = "LazyFile",
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = "ibl",
@@ -104,7 +104,7 @@ return {
   -- "gc" to comment visual regions/lines
   {
     "numToStr/Comment.nvim",
-    event = "BufEnter",
+    event = "LazyFile",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     opts = function()
       return {
@@ -116,7 +116,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    event = "VeryLazy",
+    cmd = "ToggleTerm",
     keys = {
       {
         "<leader>tf",
@@ -145,7 +145,7 @@ return {
 
   {
     "mrjones2014/smart-splits.nvim",
-    event = "BufEnter",
+    event = "VeryLazy",
     opts = {
       ignored_filetypes = { "nofile", "quickfix", "qf", "prompt" },
       ignored_buftypes = { "nofile" },
@@ -173,7 +173,7 @@ return {
 
   {
     "NvChad/nvim-colorizer.lua",
-    event = "BufEnter",
+    event = "LazyFile",
     opts = {
       user_default_options = {
         names = false,
@@ -191,7 +191,7 @@ return {
 
   {
     "folke/todo-comments.nvim",
-    event = "BufEnter",
+    event = "LazyFile",
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo comments" },
