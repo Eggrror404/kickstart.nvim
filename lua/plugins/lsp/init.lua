@@ -22,6 +22,10 @@ return {
 
   {
     "williamboman/mason.nvim",
+    cmd = "Mason",
+    keys = {
+      { "<leader>pm", "<cmd>Mason<cr>", desc = "Mason" },
+    },
     opts = {
       ui = {
         border = "rounded",

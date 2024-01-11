@@ -31,6 +31,7 @@ vim.api.nvim_create_autocmd("BufRead", {
   end,
 })
 
+-- [[ Auto-change on Oil open ]]
 vim.api.nvim_create_autocmd("BufWinEnter", {
   once = true,
   pattern = "oil:///*",

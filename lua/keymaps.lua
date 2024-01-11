@@ -1,11 +1,14 @@
 local set = vim.keymap.set
 
+set("n", "<leader>pl", "<cmd>Lazy<cr>", { desc = "Lazy.nvim" })
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
--- v-split
+-- split
 set("n", "|", "<cmd>vsplit<cr>", { desc = "Verticle split" })
+set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
 
 -- Remap for dealing with word wrap
 set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
