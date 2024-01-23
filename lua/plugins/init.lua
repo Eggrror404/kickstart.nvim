@@ -13,6 +13,27 @@ return {
           help = { conceal = false },
         },
       },
+      lsp = {
+        hover = { silent = true },
+      },
+      routes = {
+        {
+          view = "mini",
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+              { find = "%d more lines" },
+              { find = "%d lines yanked" },
+              { find = "%d fewer lines" },
+              { find = "%d lines changed" },
+              { find = "%d lines [<>]ed %d time" },
+            },
+          },
+        },
+      },
       presets = {
         bottom_search = true,
         command_palette = false,
@@ -51,6 +72,10 @@ return {
         end
       end
     end,
+  },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = "LazyFile",
   },
   {
     "h-hg/fcitx.nvim",

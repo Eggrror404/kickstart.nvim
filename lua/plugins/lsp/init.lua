@@ -6,6 +6,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "plugins.lsp.prettierd" },
   { import = "plugins.lsp.python" },
+  { import = "plugins.lsp.svelte" },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -24,6 +25,18 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      diagnostics = {
+        virtual_text = true,
+        update_in_insert = true,
+        underline = true,
+        severity_sort = true,
+        float = {
+          focused = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+        },
+      },
       servers = {},
     },
     init = function()
