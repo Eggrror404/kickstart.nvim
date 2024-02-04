@@ -10,17 +10,18 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "bash",
-        "diff",
-        "html",
-        "lua",
-        "luadoc",
-        "vim",
-        "vimdoc",
-      },
-    },
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, {
+          "bash",
+          "diff",
+          "json",
+          "lua",
+          "luadoc",
+          "vimdoc",
+        })
+      end
+    end,
   },
   {
     "neovim/nvim-lspconfig",

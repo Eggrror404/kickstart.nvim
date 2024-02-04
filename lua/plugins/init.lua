@@ -21,4 +21,8 @@ return {
     "Eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton",
   },
+  {
+    "ActivityWatch/aw-watcher-vim",
+    event = "VeryLazy",
+  },
 }
