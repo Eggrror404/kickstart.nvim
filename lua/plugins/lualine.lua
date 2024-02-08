@@ -7,7 +7,7 @@ return {
     opts.sections = {
       lualine_a = { "mode" },
       lualine_b = {
-        "branch",
+        { "branch", separator = "" },
         { -- from lazyvim
           "diff",
           symbols = {
@@ -30,15 +30,6 @@ return {
       lualine_c = {
         Util.lualine.root_dir(),
         {
-          "diagnostics",
-          symbols = {
-            error = icons.diagnostics.Error,
-            warn = icons.diagnostics.Warn,
-            info = icons.diagnostics.Info,
-            hint = icons.diagnostics.Hint,
-          },
-        },
-        {
           "filetype",
           icon_only = true,
           separator = "",
@@ -55,28 +46,17 @@ return {
             return ""
           end,
         },
+        {
+          "diagnostics",
+          symbols = {
+            error = icons.diagnostics.Error,
+            warn = icons.diagnostics.Warn,
+            info = icons.diagnostics.Info,
+            hint = icons.diagnostics.Hint,
+          },
+        },
       },
       lualine_x = {
-        {
-          function()
-            return require("noice").api.status.command.get()
-          end,
-          cond = function()
-            return package.loaded["noice"]
-              and require("noice").api.status.command.has()
-          end,
-          color = Util.ui.fg("Statement"),
-        },
-        {
-          function()
-            return require("noice").api.status.mode.get()
-          end,
-          cond = function()
-            return package.loaded["noice"]
-              and require("noice").api.status.mode.has()
-          end,
-          color = Util.ui.fg("Constant"),
-        },
         {
           function()
             return require("dap").status()
@@ -114,8 +94,8 @@ return {
         },
       },
       lualine_z = {
-        { "location", separator = " " },
-        { "progress", padding = { left = 0, right = 1 } },
+        { "location", separator = "" },
+        { "progress" },
       },
     }
 

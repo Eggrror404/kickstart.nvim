@@ -21,6 +21,9 @@ end, { desc = "Gitui (root dir)" })
 unmap("n", "<leader>l")
 map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
+unmap("n", "<leader>xl")
+unmap("n", "<leader>xq")
+
 -- formatting
 unmap({ "n", "v" }, "<leader>cf")
 map({ "n", "v" }, "<leader>lf", function()
@@ -30,3 +33,9 @@ end, { desc = "Format" })
 -- diagnostic
 unmap("n", "<leader>cd")
 map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+-- windows
+unmap("n", "<leader>ww")
+unmap("n", "<leader>wd")
+unmap("n", "<leader>w-")
+unmap("n", "<leader>w|")

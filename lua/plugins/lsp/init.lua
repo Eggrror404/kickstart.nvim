@@ -25,6 +25,14 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "j-hui/fidget.nvim",
+        opts = {
+          notification = { window = { winblend = 0 } },
+        },
+      },
+    },
     opts = {
       diagnostics = {
         virtual_text = true,
@@ -45,7 +53,22 @@ return {
       for _, k in ipairs(keys) do
         -- replace all <leader>c keymaps into <leader>l
         k[1] = k[1]:gsub("<leader>c", "<leader>l")
+
+        if k[1] == "<leader>ll" then
+          k[1] = "<leader>li"
+        end
       end
+
+      -- rounded border for diagnostics
+      vim.diagnostic.config({
+        float = { border = "rounded" },
+      })
+
+      -- rounded border for hover & documentation
+      vim.lsp.handlers["textDocument/signatureHelp"] =
+        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+      vim.lsp.handlers["textDocument/hover"] =
+        vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
     end,
   },
   {
