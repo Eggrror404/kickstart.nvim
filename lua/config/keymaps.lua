@@ -30,12 +30,3 @@ end, { desc = "Format" })
 -- diagnostic
 unmap("n", "<leader>cd")
 map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-
--- floating terminal
--- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua#L140-L145
-local lazyterm = function()
-  Util.terminal(nil, { cwd = Util.root(), border = "rounded" })
-end
-map("n", "<leader>t", lazyterm, { desc = "Terminal (root dir)" })
-map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
-map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
