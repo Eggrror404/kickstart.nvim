@@ -167,7 +167,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile', 'BufWritePre' }, {
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup('plugins', {
   defaults = {
-    -- lazy = true,
+    lazy = true,
   },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

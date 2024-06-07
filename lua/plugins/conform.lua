@@ -1,6 +1,7 @@
 return { -- Autoformat
   'stevearc/conform.nvim',
-  lazy = false,
+  event = 'BufWritePre',
+  cmd = 'ConformInfo',
   keys = {
     {
       '<leader>f',
@@ -33,4 +34,8 @@ return { -- Autoformat
       -- javascript = { { "prettierd", "prettier" } },
     },
   },
+  init = function()
+    -- If you want the formatexpr, here is the place to set it
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
 }
