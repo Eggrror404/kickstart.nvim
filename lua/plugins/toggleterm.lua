@@ -3,8 +3,8 @@ local lazygit
 
 return {
   'akinsho/toggleterm.nvim',
-  event = 'VeryLazy',
   keys = {
+    { '<C-/>' },
     {
       '<leader>g',
       function()
@@ -23,7 +23,7 @@ return {
     },
   },
   opts = {
-    open_mapping = [[<C-/>]],
+    open_mapping = '<C-/>',
     direction = 'float',
     float_opts = {
       border = 'rounded',

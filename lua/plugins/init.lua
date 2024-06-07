@@ -6,6 +6,12 @@ return {
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   { 'tpope/vim-sleuth', event = 'LazyFile' }, -- Detect tabstop and shiftwidth automatically
 
+  { 'HiPhish/rainbow-delimiters.nvim', event = 'LazyFile' },
+
+  { 'h-hg/fcitx.nvim', event = 'InsertEnter' },
+
+  { 'Eandrju/cellular-automaton.nvim', cmd = 'CellularAutomaton' },
+
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -18,23 +24,7 @@ return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', event = 'LazyFile' },
 
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-  --    require('gitsigns').setup({ ... })
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
+  { 'windwp/nvim-ts-autotag', event = 'LazyFile' },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -51,29 +41,6 @@ return {
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-      }
-      -- visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
-    end,
-  },
-
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -87,45 +54,6 @@ return {
     event = 'LazyFile',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
-  },
-
-  { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
-    event = 'VeryLazy',
-    config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [']quote
-      --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
-
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
-
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
-    end,
   },
 
   {
@@ -148,6 +76,45 @@ return {
     end,
   },
 
+  {
+    'NvChad/nvim-colorizer.lua',
+    event = 'LazyFile',
+    opts = {
+      filetypes = {
+        '*',
+        css = { names = true, css_fn = true },
+      },
+      user_default_options = {
+        RGB = false, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        names = false, -- "Name" codes like Blue or blue
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+      },
+    },
+  },
+
+  {
+    'mrjones2014/smart-splits.nvim',
+    keys = function()
+      local splits = require 'smart-splits'
+      return {
+        { '<C-h>', splits.move_cursor_left, desc = 'Go to left window' },
+        { '<C-j>', splits.move_cursor_down, desc = 'Go to lower window' },
+        { '<C-k>', splits.move_cursor_up, desc = 'Go to upper window' },
+        { '<C-l>', splits.move_cursor_right, desc = 'Go to right window' },
+        { '<C-Left>', splits.resize_left, desc = 'Resize window leftwards' },
+        { '<C-Down>', splits.resize_down, desc = 'Resize window downwards' },
+        { '<C-Up>', splits.resize_up, desc = 'Resize window upwards' },
+        {
+          '<C-Right>',
+          splits.resize_right,
+          desc = 'Resize window rightwards',
+        },
+      }
+    end,
+    opts = {},
+  },
+
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -158,8 +125,7 @@ return {
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
+  -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 }
