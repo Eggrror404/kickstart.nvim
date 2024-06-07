@@ -8,7 +8,7 @@ return {
         function()
           require('oil').toggle_float()
         end,
-        desc = 'Oil file explorer (root dir)',
+        desc = 'Oil file explorer',
       },
     },
     opts = {
