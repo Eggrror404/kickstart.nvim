@@ -59,9 +59,6 @@ return {
   {
     'rcarriga/nvim-notify',
     event = 'VeryLazy',
-    opts = {
-      background_colour = '#000000',
-    },
     config = function(_, opts)
       require('notify').setup(opts)
       vim.notify = require 'notify'
@@ -73,6 +70,16 @@ return {
     event = 'VeryLazy',
     config = function()
       vim.cmd 'AWStart'
+    end,
+  },
+
+  {
+    'ahmedkhalf/project.nvim',
+    event = 'LazyFile',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function(_, opts)
+      require('project_nvim').setup(opts)
+      require('telescope').load_extension 'projects'
     end,
   },
 
@@ -113,6 +120,34 @@ return {
       }
     end,
     opts = {},
+  },
+
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'LazyFile',
+    opts = {
+      indent = {
+        char = '│',
+        tab_char = '│',
+      },
+      scope = { show_start = false, show_end = false },
+      exclude = {
+        filetypes = {
+          'help',
+          'alpha',
+          'dashboard',
+          'neo-tree',
+          'Trouble',
+          'trouble',
+          'lazy',
+          'mason',
+          'notify',
+          'toggleterm',
+          'lazyterm',
+        },
+      },
+    },
+    main = 'ibl',
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
