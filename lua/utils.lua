@@ -9,14 +9,16 @@ local M = { lsp = {} }
 ---@param path? string
 ---@param opts? { warn?: boolean }
 function M.get_pkg_path(pkg, path, opts)
-  pcall(require, 'mason') -- make sure Mason is loaded. Will fail when generating docs
-  local root = vim.env.MASON or (vim.fn.stdpath 'data' .. '/mason')
+  pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
+  local root = vim.env.MASON or (vim.fn.stdpath "data" .. "/mason")
   opts = opts or {}
   opts.warn = opts.warn == nil and true or opts.warn
-  path = path or ''
-  local ret = root .. '/packages/' .. pkg .. '/' .. path
-  if opts.warn and not vim.loop.fs_stat(ret) and not require('lazy.core.config').headless() then
-    print(('Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package.'):format(pkg, path))
+  path = path or ""
+  local ret = root .. "/packages/" .. pkg .. "/" .. path
+  if opts.warn and not vim.loop.fs_stat(ret) and not require("lazy.core.config").headless() then
+    print(
+      ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(pkg, path)
+    )
   end
   return ret
 end
@@ -46,12 +48,12 @@ function M.lsp.execute(opts)
     arguments = opts.arguments,
   }
   if opts.open then
-    require('trouble').open {
-      mode = 'lsp_command',
+    require("trouble").open {
+      mode = "lsp_command",
       params = params,
     }
   else
-    return vim.lsp.buf_request(0, 'workspace/executeCommand', params, opts.handler)
+    return vim.lsp.buf_request(0, "workspace/executeCommand", params, opts.handler)
   end
 end
 

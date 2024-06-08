@@ -1,39 +1,39 @@
 return {
-  'folke/trouble.nvim',
+  "folke/trouble.nvim",
   keys = {
     {
-      '<leader>tt',
-      '<cmd>Trouble diagnostics toggle<cr>',
-      desc = 'Trouble Diagnostics',
+      "<leader>tt",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Trouble Diagnostics",
     },
     {
-      '<leader>tT',
-      '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-      desc = 'Trouble Buffer Diagnostics',
+      "<leader>tT",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Trouble Buffer Diagnostics",
     },
     {
-      '<leader>tL',
-      '<cmd>Trouble loclist toggle<cr>',
-      desc = 'Trouble Location List',
+      "<leader>tL",
+      "<cmd>Trouble loclist toggle<cr>",
+      desc = "Trouble Location List",
     },
     {
-      '<leader>tQ',
-      '<cmd>Trouble qflist toggle<cr>',
-      desc = 'Trouble Quickfix List',
+      "<leader>tQ",
+      "<cmd>Trouble qflist toggle<cr>",
+      desc = "Trouble Quickfix List",
     },
     {
-      ']t',
+      "]t",
       function()
-        require('trouble').next { skip_groups = true, jump = true }
+        require("trouble").next { skip_groups = true, jump = true }
       end,
-      desc = 'Next Trouble Item',
+      desc = "Next Trouble Item",
     },
     {
-      '[t',
+      "[t",
       function()
-        require('trouble').prev { skip_groups = true, jump = true }
+        require("trouble").prev { skip_groups = true, jump = true }
       end,
-      desc = 'Previous Trouble Item',
+      desc = "Previous Trouble Item",
     },
   },
   opts = {

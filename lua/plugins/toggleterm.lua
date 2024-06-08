@@ -2,31 +2,31 @@
 local lazygit
 
 return {
-  'akinsho/toggleterm.nvim',
+  "akinsho/toggleterm.nvim",
   keys = {
-    { '<C-/>' },
+    { "<C-/>" },
     {
-      '<leader>g',
+      "<leader>g",
       function()
         if not lazygit then
-          lazygit = require('toggleterm.terminal').Terminal:new {
-            cmd = 'lazygit',
-            display_name = 'Lazygit',
-            direction = 'float',
+          lazygit = require("toggleterm.terminal").Terminal:new {
+            cmd = "lazygit",
+            display_name = "Lazygit",
+            direction = "float",
             hidden = true,
           }
         end
 
         lazygit:toggle()
       end,
-      desc = 'Lazygit',
+      desc = "Lazygit",
     },
   },
   opts = {
-    open_mapping = '<C-/>',
-    direction = 'float',
+    open_mapping = "<C-/>",
+    direction = "float",
     float_opts = {
-      border = 'rounded',
+      border = "rounded",
     },
   },
 }

@@ -1,9 +1,9 @@
 return {
   {
-    'mfussenegger/nvim-lint',
+    "mfussenegger/nvim-lint",
     opts = {
       linters_by_ft = {
-        dockerfile = { 'hadolint' },
+        dockerfile = { "hadolint" },
       },
     },
   },
