@@ -13,7 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 require 'lazyfile'
 
 -- [[ Configure and install plugins ]]
-require('lazy').setup('plugins', {
+require('lazy').setup({
+  { import = 'plugins' },
+  { import = 'lsp' },
+}, {
   defaults = {
     lazy = true,
   },
