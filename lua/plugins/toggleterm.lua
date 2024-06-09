@@ -3,6 +3,7 @@ local lazygit
 
 return {
   "akinsho/toggleterm.nvim",
+  cmd = "ToggleTerm",
   keys = {
     { "<C-/>" },
     {
