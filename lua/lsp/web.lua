@@ -1,7 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "svelte" } },
+    opts = {
+      ensure_installed = { "javascript", "typescript", "css", "html", "svelte" },
+    },
   },
   {
     "stevearc/conform.nvim",
