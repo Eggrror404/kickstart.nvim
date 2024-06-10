@@ -12,9 +12,7 @@ return { -- LSP Configuration & Plugins
       "j-hui/fidget.nvim",
       opts = {
         notification = {
-          window = {
-            winblend = 0,
-          },
+          window = { winblend = 0 },
         },
         -- ... the rest of your fidget config
       },
@@ -130,6 +128,9 @@ return { -- LSP Configuration & Plugins
         --  For example, in C this would take you to the header.
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+        vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
+        vim.keymap.set("i", "<C-K>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "LSP: Signature Help" })
+
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
@@ -184,7 +185,7 @@ return { -- LSP Configuration & Plugins
     --    :Mason
     --
     --  You can press `g?` for help in this menu.
-    require("mason").setup()
+    require("mason").setup { ui = { border = "rounded" } }
 
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
@@ -204,5 +205,17 @@ return { -- LSP Configuration & Plugins
         end,
       },
     }
+
+    -- Configure LSP UI appearence
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      border = "rounded",
+    })
+
+    local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    end
   end,
 }
