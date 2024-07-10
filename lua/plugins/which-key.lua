@@ -6,17 +6,18 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     require("which-key").register {
-      ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-      ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-      ["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-      ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-      ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-      ["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-      ["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
+      ["<leader>c"] = { name = "Code", _ = "which_key_ignore" },
+      ["<leader>d"] = { name = "Document", _ = "which_key_ignore" },
+      ["<leader>r"] = { name = "Rename", _ = "which_key_ignore" },
+      ["<leader>s"] = { name = "Search", _ = "which_key_ignore" },
+      ["<leader>w"] = { name = "Workspace", _ = "which_key_ignore" },
+      ["<leader>t"] = { name = "Trouble", _ = "which_key_ignore" },
+      ["<leader>h"] = { name = "Git Hunk", _ = "which_key_ignore" },
+      ["<leader>u"] = { name = "Toggle", _ = "which_key_ignore" },
     }
     -- visual mode
     require("which-key").register({
-      ["<leader>h"] = { "Git [H]unk" },
+      ["<leader>h"] = { "Git Hunk" },
     }, { mode = "v" })
   end,
 }

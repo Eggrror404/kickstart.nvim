@@ -5,10 +5,10 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { desc = "Show [D]iagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open [D]iagnostic [Q]uickfix list" })
+vim.keymap.set("n", "d", vim.diagnostic.goto_prev, { desc = "Go to previous Diagnostic message" })
+vim.keymap.set("n", "d", vim.diagnostic.goto_next, { desc = "Go to next Diagnostic message" })
+vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show Diagnostic Error messages" })
+vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -18,25 +18,20 @@ vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open [D]i
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---  (REPLACED BY SMART-SPLITS.NVIM)
---
---  See `:help wincmd` for a list of all window commands
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 -- [[ Custom Keymaps ]]
 
 -- Toggle comment with <leader>/
 -- (code from Comment.nvim help doc)
 vim.keymap.set("n", "<leader>/", function()
   require("Comment.api").toggle.linewise.current()
-end)
+end, { desc = "Toggle Commend" })
 vim.keymap.set("x", "<leader>/", function()
   local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
   vim.api.nvim_feedkeys(esc, "nx", false)
   require("Comment.api").toggle.linewise(vim.fn.visualmode())
-end)
+end, { desc = "Toggle Commend" })
+
+-- Toggle line wrap
+vim.keymap.set("n", "<leader>uw", function()
+  vim.cmd [[set wrap!]]
+end, { desc = "Toggle Line Wrap" })

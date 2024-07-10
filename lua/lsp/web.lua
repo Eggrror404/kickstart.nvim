@@ -51,18 +51,6 @@ return {
                 enableServerSideFuzzyMatch = true,
               },
             },
-            tsserver = {
-              globalPlugins = {
-                {
-                  name = "typescript-svelte-plugin",
-                  location = require("utils").get_pkg_path(
-                    "svelte-language-server",
-                    "/node_modules/typescript-svelte-plugin"
-                  ),
-                  enableForWorkspaceTypeScriptVersions = true,
-                },
-              },
-            },
           },
           -- typescript and javascript shares the config
           typescript = {
@@ -174,6 +162,28 @@ return {
         },
       },
     },
+  },
+  -- add svelte typescript plugin here
+  -- it requires Svelte LSP to be installed first,
+  -- so we set this in a function so it's called after Mason loaded
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      vim.tbl_extend("keep", opts.vtsls.settings.vtsls, {
+        tsserver = {
+          globalPlugins = {
+            {
+              name = "typescript-svelte-plugin",
+              location = require("utils").get_pkg_path(
+                "svelte-language-server",
+                "/node_modules/typescript-svelte-plugin"
+              ),
+              enableForWorkspaceTypeScriptVersions = true,
+            },
+          },
+        },
+      })
+    end,
   },
   {
     "roobert/tailwindcss-colorizer-cmp.nvim",
