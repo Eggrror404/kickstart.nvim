@@ -118,6 +118,12 @@ return {
     main = "ibl",
   },
 
+  {
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.lint',
   require "kickstart.plugins.autopairs",

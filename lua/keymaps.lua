@@ -5,10 +5,12 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "d", vim.diagnostic.goto_prev, { desc = "Go to previous Diagnostic message" })
-vim.keymap.set("n", "d", vim.diagnostic.goto_next, { desc = "Go to next Diagnostic message" })
-vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show Diagnostic Error messages" })
-vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Open Diagnostic Quickfix list" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto Previous Diagnostic Message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto Next Diagnostic Message" })
+vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Show Diagnostic Error Messages" })
+vim.keymap.set("n", "<leader>ud", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "Toggle Diagnostic Messages" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

@@ -5,7 +5,14 @@ return {
   "akinsho/toggleterm.nvim",
   cmd = "ToggleTerm",
   keys = {
-    { "<C-/>" },
+    { "<C-/>", desc = "Open Terminal" },
+    {
+      "<leader>t",
+      function()
+        require("toggleterm").toggle()
+      end,
+      desc = "Open Terminal",
+    },
     {
       "<leader>g",
       function()

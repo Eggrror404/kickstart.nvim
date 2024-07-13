@@ -3,22 +3,22 @@ return {
   cmd = "Trouble",
   keys = {
     {
-      "<leader>tt",
+      "<leader>lt",
       "<cmd>Trouble diagnostics toggle<cr>",
       desc = "Trouble Diagnostics",
     },
     {
-      "<leader>tT",
+      "<leader>lT",
       "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
       desc = "Trouble Buffer Diagnostics",
     },
     {
-      "<leader>tL",
+      "<leader>ll",
       "<cmd>Trouble loclist toggle<cr>",
       desc = "Trouble Location List",
     },
     {
-      "<leader>tQ",
+      "<leader>lq",
       "<cmd>Trouble qflist toggle<cr>",
       desc = "Trouble Quickfix List",
     },
