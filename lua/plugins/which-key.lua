@@ -1,19 +1,27 @@
-return { -- Useful plugin to show you pending keybinds.
+return {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  config = function() -- This is the function that runs, AFTER loading
-    require("which-key").setup()
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show { global = false }
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
+  },
+  opts = {
+    icons = { mappings = false },
+  },
+  config = function(_, opts)
+    require("which-key").setup(opts)
 
     -- Document existing key chains
-    require("which-key").register {
-      ["<leader>s"] = { name = "Search", _ = "which_key_ignore" },
-      ["<leader>h"] = { name = "Git Hunk", _ = "which_key_ignore" },
-      ["<leader>l"] = { name = "LSP / Code", _ = "which_key_ignore" },
-      ["<leader>u"] = { name = "Toggle", _ = "which_key_ignore" },
+    require("which-key").add {
+      { "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
+      { "<leader>l", group = "LSP / Code" },
+      { "<leader>s", group = "Search" },
+      { "<leader>u", group = "Toggle" },
     }
-    -- visual mode
-    require("which-key").register({
-      ["<leader>h"] = { "Git Hunk" },
-    }, { mode = "v" })
   end,
 }
