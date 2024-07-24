@@ -71,3 +71,6 @@ vim.opt.scrolloff = 10
 -- Allow horizontal scrolling
 vim.opt.wrap = false
 vim.opt.sidescroll = 5
+
+-- Set diagnostic popup border
+vim.diagnostic.config { float = { border = "rounded" } }

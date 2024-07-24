@@ -3,9 +3,7 @@ return {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      linters_by_ft = {
-        markdown = { "markdownlint" },
-      },
+      linters_by_ft = {},
     },
     config = function(_, opts)
       local lint = require "lint"
