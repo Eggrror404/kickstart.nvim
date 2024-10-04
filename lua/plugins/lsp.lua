@@ -119,11 +119,15 @@ return { -- LSP Configuration & Plugins
 
         -- Rename the variable under your cursor.
         --  Most Language Servers support renaming across files, etc.
+        map("<leader>r", vim.lsp.buf.rename, "Rename")
         map("<leader>lr", vim.lsp.buf.rename, "Rename")
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
         map("<leader>la", vim.lsp.buf.code_action, "Code Action")
+
+        -- Restart the language server
+        map("<leader>lR", "<cmd>LspRestart<cr>", "Restart Server")
 
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
