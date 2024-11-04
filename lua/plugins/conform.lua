@@ -52,6 +52,31 @@ return { -- Autoformat
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
+    local notify_record = nil
+    local notify_disable_state = function()
+      notify_record = vim.notify(
+        string.format(
+          "Global format-on-save: `%s`\nBuffer format-on-save: `%s`",
+          vim.g.disable_autoformat and " Disabled" or " Enabled",
+          vim.b.disable_autoformat and " Disabled" or " Enabled"
+        ),
+        vim.log.levels.INFO,
+        {
+          title = "AutoFormat Toggle",
+          replace = notify_record,
+          on_open = function(win)
+            vim.wo[win].conceallevel = 3
+            vim.wo[win].concealcursor = "n"
+            vim.wo[win].spell = false
+            vim.treesitter.start(vim.api.nvim_win_get_buf(win), "markdown")
+          end,
+          on_close = function()
+            notify_record = nil
+          end,
+        }
+      )
+    end
+
     -- Register format-on-save toggle commands
     vim.api.nvim_create_user_command("FormatDisable", function(args)
       -- FormatDisable! will disable formatting just for this buffer
@@ -60,19 +85,23 @@ return { -- Autoformat
       else
         vim.g.disable_autoformat = true
       end
+      notify_disable_state()
     end, { desc = "Disable format-on-save", bang = true })
-    vim.api.nvim_create_user_command("FormatEnable", function()
-      vim.b.disable_autoformat = false
-      vim.g.disable_autoformat = false
-    end, { desc = "Re-enable format-on-save" })
+    vim.api.nvim_create_user_command("FormatEnable", function(args)
+      if args.bang then
+        vim.b.disable_autoformat = false
+      else
+        vim.g.disable_autoformat = false
+      end
+      notify_disable_state()
+    end, { desc = "Re-enable format-on-save", bang = true })
     vim.api.nvim_create_user_command("FormatToggle", function(args)
       if args.bang then
         vim.b.disable_autoformat = not vim.b.disable_autoformat
-      elseif vim.b.disable_autoformat or vim.g.disable_autoformat then
-        vim.cmd [[FormatEnable]]
       else
-        vim.cmd [[FormatDisable]]
+        vim.g.disable_autoformat = not vim.g.disable_autoformat
       end
+      notify_disable_state()
     end, { desc = "Toggle format-on-save", bang = true })
   end,
 }

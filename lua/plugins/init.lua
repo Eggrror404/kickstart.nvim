@@ -73,23 +73,20 @@ return {
 
   {
     "mrjones2014/smart-splits.nvim",
-    keys = function()
-      local splits = require "smart-splits"
-      return {
-        { "<C-h>", splits.move_cursor_left, desc = "Go to left window" },
-        { "<C-j>", splits.move_cursor_down, desc = "Go to lower window" },
-        { "<C-k>", splits.move_cursor_up, desc = "Go to upper window" },
-        { "<C-l>", splits.move_cursor_right, desc = "Go to right window" },
-        { "<C-Left>", splits.resize_left, desc = "Resize window leftwards" },
-        { "<C-Down>", splits.resize_down, desc = "Resize window downwards" },
-        { "<C-Up>", splits.resize_up, desc = "Resize window upwards" },
-        {
-          "<C-Right>",
-          splits.resize_right,
-          desc = "Resize window rightwards",
-        },
-      }
-    end,
+    keys = { ---@format disable
+      { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Go to left window" },
+      { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Go to lower window" },
+      { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Go to upper window" },
+      { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Go to right window" },
+      { "<C-Left>", function() require("smart-splits").resize_left() end, desc = "Resize window leftwards" },
+      { "<C-Down>", function() require("smart-splits").resize_down() end, desc = "Resize window downwards" },
+      { "<C-Up>", function() require("smart-splits").resize_up() end, desc = "Resize window upwards" },
+      {
+        "<C-Right>",
+        function() require("smart-splits").resize_right() end,
+        desc = "Resize window rightwards",
+      },
+    },
     opts = {},
   },
 
