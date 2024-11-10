@@ -12,16 +12,11 @@ return {
   },
   opts = {
     icons = { mappings = false },
-  },
-  config = function(_, opts)
-    require("which-key").setup(opts)
-
-    -- Document existing key chains
-    require("which-key").add {
+    spec = {
       { "<leader>h", group = "Git Hunk", mode = { "n", "v" } },
-      { "<leader>l", group = "LSP / Code" },
+      { "<leader>l", group = "LSP / Code", mode = { "n", "x" } },
       { "<leader>s", group = "Search" },
       { "<leader>u", group = "Toggle" },
-    }
-  end,
+    },
+  },
 }
