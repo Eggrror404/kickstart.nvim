@@ -37,14 +37,6 @@ return {
   },
 
   {
-    "ActivityWatch/aw-watcher-vim",
-    event = "VeryLazy",
-    config = function()
-      vim.cmd "AWStart"
-    end,
-  },
-
-  {
     "ahmedkhalf/project.nvim",
     event = "LazyFile",
     dependencies = { "nvim-telescope/telescope.nvim" },
@@ -74,16 +66,60 @@ return {
   {
     "mrjones2014/smart-splits.nvim",
     keys = { ---@format disable
-      { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Go to left window" },
-      { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Go to lower window" },
-      { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Go to upper window" },
-      { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Go to right window" },
-      { "<C-Left>", function() require("smart-splits").resize_left() end, desc = "Resize window leftwards" },
-      { "<C-Down>", function() require("smart-splits").resize_down() end, desc = "Resize window downwards" },
-      { "<C-Up>", function() require("smart-splits").resize_up() end, desc = "Resize window upwards" },
+      {
+        "<C-h>",
+        function()
+          require("smart-splits").move_cursor_left()
+        end,
+        desc = "Go to left window",
+      },
+      {
+        "<C-j>",
+        function()
+          require("smart-splits").move_cursor_down()
+        end,
+        desc = "Go to lower window",
+      },
+      {
+        "<C-k>",
+        function()
+          require("smart-splits").move_cursor_up()
+        end,
+        desc = "Go to upper window",
+      },
+      {
+        "<C-l>",
+        function()
+          require("smart-splits").move_cursor_right()
+        end,
+        desc = "Go to right window",
+      },
+      {
+        "<C-Left>",
+        function()
+          require("smart-splits").resize_left()
+        end,
+        desc = "Resize window leftwards",
+      },
+      {
+        "<C-Down>",
+        function()
+          require("smart-splits").resize_down()
+        end,
+        desc = "Resize window downwards",
+      },
+      {
+        "<C-Up>",
+        function()
+          require("smart-splits").resize_up()
+        end,
+        desc = "Resize window upwards",
+      },
       {
         "<C-Right>",
-        function() require("smart-splits").resize_right() end,
+        function()
+          require("smart-splits").resize_right()
+        end,
         desc = "Resize window rightwards",
       },
     },
