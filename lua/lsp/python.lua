@@ -7,7 +7,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       basedpyright = {},
-      ruff_lsp = {},
+      ["ruff-lsp"] = {},
     },
   },
   {
