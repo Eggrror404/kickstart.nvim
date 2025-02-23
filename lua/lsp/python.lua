@@ -6,8 +6,23 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      basedpyright = {},
-      ["ruff-lsp"] = {},
+      basedpyright = {
+        settings = {
+          analysis = {
+            -- one level down from `recommended`
+            typeCheckingMode = "strict",
+          },
+        },
+      },
+      ruff = {},
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        python = { "ruff_format" },
+      },
     },
   },
   {

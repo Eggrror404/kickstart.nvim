@@ -7,6 +7,9 @@ vim.g.maplocalleader = " "
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Set to true to load the lsp files
+vim.g.enable_lsps = true
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -75,6 +78,10 @@ vim.opt.scrolloff = 10
 -- Allow horizontal scrolling
 vim.opt.wrap = true
 vim.opt.sidescroll = 5
+
+-- Set tab width
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Set diagnostic popup border
 vim.diagnostic.config { float = { border = "rounded" } }
