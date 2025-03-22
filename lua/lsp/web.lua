@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "javascript", "typescript", "css", "html", "svelte" },
+      ensure_installed = { "javascript", "typescript", "css", "html", "svelte", "astro" },
     },
   },
   {
@@ -26,6 +26,7 @@ return {
         ["graphql"] = { "prettierd" },
         ["handlebars"] = { "prettierd" },
         ["svelte"] = { "prettierd" },
+        ["astro"] = { "prettierd" },
       },
     },
   },
@@ -153,6 +154,8 @@ return {
         },
       },
 
+      astro = {},
+
       prettierd = {},
 
       eslint = {
@@ -163,8 +166,8 @@ return {
       },
     },
   },
-  -- add svelte typescript plugin here
-  -- it requires Svelte LSP to be installed first,
+  -- add svelte & astro typescript plugin here
+  -- it requires Svelte LSP & Astro LSP to be installed first,
   -- so we set this in a function so it's called after Mason loaded
   {
     "neovim/nvim-lspconfig",
@@ -178,6 +181,17 @@ return {
                 "svelte-language-server",
                 "/node_modules/typescript-svelte-plugin"
               ),
+              enableForWorkspaceTypeScriptVersions = true,
+            },
+          },
+        },
+      })
+      vim.tbl_extend("keep", opts.vtsls.settings.vtsls, {
+        tsserver = {
+          globalPlugins = {
+            {
+              name = "@astrojs/ts-plugin",
+              location = require("utils").get_pkg_path("astro-language-server", "/node_modules/@astrojs/ts-plugin"),
               enableForWorkspaceTypeScriptVersions = true,
             },
           },
