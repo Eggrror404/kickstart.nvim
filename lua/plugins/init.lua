@@ -126,6 +126,18 @@ return {
     opts = {},
   },
 
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      file_types = { "markdown", "Avante" },
+      completions = { lsp = { enabled = true } },
+
+      heading = { icons = {} },
+      code = { style = "normal" },
+    },
+    ft = { "markdown", "Avante" },
+  },
+
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.lint',
   require "kickstart.plugins.autopairs",
