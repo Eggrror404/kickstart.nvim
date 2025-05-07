@@ -87,5 +87,8 @@ vim.opt.sidescroll = 5
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
--- Set diagnostic popup border
-vim.diagnostic.config { float = { border = "rounded" } }
+-- Set window borders
+vim.o.winborder = "rounded"
+
+-- Eanble virtual text
+vim.diagnostic.config { virtual_text = true }
