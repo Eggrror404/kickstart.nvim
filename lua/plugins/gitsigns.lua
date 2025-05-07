@@ -48,17 +48,17 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
       map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Git Stage Hunk" })
       map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Git Reset Hunk" })
       map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Git Stage Buffer" })
-      map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "Git Undo Stage Hunk" })
       map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Git Reset Buffer" })
       map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Git Preview Hunk" })
+      map("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "Git Preview Hunk Inline" })
       map("n", "<leader>hb", gitsigns.blame_line, { desc = "Git Blame Line" })
       map("n", "<leader>hd", gitsigns.diffthis, { desc = "Git Diff against Index" })
       map("n", "<leader>hD", function()
         gitsigns.diffthis "@"
       end, { desc = "Git Diff Against Last Commit" })
+
       -- Toggles
       map("n", "<leader>ub", gitsigns.toggle_current_line_blame, { desc = "Toggle Git Show Blame Line" })
-      map("n", "<leader>uD", gitsigns.toggle_deleted, { desc = "Toggle Git Show Deleted" })
     end,
   },
 }

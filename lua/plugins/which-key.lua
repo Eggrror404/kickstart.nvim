@@ -11,6 +11,9 @@ return {
     },
   },
   opts = {
+    -- delay between pressing a key and opening which-key (milliseconds)
+    -- this setting is independent of vim.opt.timeoutlen
+    delay = 0,
     icons = { mappings = false },
     spec = {
       { "<leader>h", group = "Git Hunk", mode = { "n", "v" } },

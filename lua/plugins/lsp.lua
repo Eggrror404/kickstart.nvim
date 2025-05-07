@@ -7,20 +7,19 @@ return {
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         { path = "snacks.nvim", words = { "Snacks" } },
       },
     },
   },
-  { "Bilal2453/luvit-meta", lazy = true },
 
   -- LSP Configuration & Plugins
   {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      { "williamboman/mason.nvim", cmd = "Mason", config = true }, -- NOTE: Must be loaded before dependants
+      -- Mason must be loaded before its dependents so we need to set it up here.
+      { "williamboman/mason.nvim", opts = { ui = { border = "rounded" } } },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
@@ -99,46 +98,47 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-
           -- Find references for the word under your cursor.
-          map("gr", require("telescope.builtin").lsp_references, "Goto References")
+          map("grr", require("telescope.builtin").lsp_references, "Goto References")
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+          map("gri", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+
+          -- Jump to the definition of the word under your cursor.
+          --  This is where a variable was first declared, or where a function is defined, etc.
+          --  To jump back, press <C-t>.
+          map("grd", require("telescope.builtin").lsp_definitions, "Goto Definition")
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map("gY", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+          map("grt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+
+          -- WARN: This is not Goto Definition, this is Goto Declaration.
+          --  For example, in C this would take you to the header.
+          map("grD", vim.lsp.buf.declaration, "Goto Declaration")
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+          map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map("<leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+          map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
           map("<leader>r", vim.lsp.buf.rename, "Rename")
-          map("<leader>lr", vim.lsp.buf.rename, "Rename")
+          map("grn", vim.lsp.buf.rename, "Rename")
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map("<leader>la", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+          map("gra", vim.lsp.buf.code_action, "Goto Code Action", { "n", "x" })
 
           -- Restart the language server
           map("<leader>lR", "<cmd>LspRestart<cr>", "Restart Server")
-
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
-          --  For example, in C this would take you to the header.
-          map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
           map("<C-K>", vim.lsp.buf.signature_help, "Signature Help")
           map("<C-K>", vim.lsp.buf.signature_help, "Signature Help", "i")
@@ -149,7 +149,7 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -176,7 +176,7 @@ return {
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             map("<leader>uh", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, "Toggle Inlay Hints")
@@ -184,12 +184,34 @@ return {
         end,
       })
 
-      -- Change diagnostic symbols in the sign column (gutter)
-      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
+      -- Diagnostic Config
+      -- See :help vim.diagnostic.Opts
+      vim.diagnostic.config {
+        severity_sort = true,
+        float = { border = "rounded", source = "if_many" },
+        underline = { severity = vim.diagnostic.severity.ERROR },
+        signs = vim.g.have_nerd_font and {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.INFO] = "󰋽 ",
+            [vim.diagnostic.severity.HINT] = "󰌶 ",
+          },
+        } or {},
+        virtual_text = {
+          source = "if_many",
+          spacing = 2,
+          format = function(diagnostic)
+            local diagnostic_message = {
+              [vim.diagnostic.severity.ERROR] = diagnostic.message,
+              [vim.diagnostic.severity.WARN] = diagnostic.message,
+              [vim.diagnostic.severity.INFO] = diagnostic.message,
+              [vim.diagnostic.severity.HINT] = diagnostic.message,
+            }
+            return diagnostic_message[diagnostic.severity]
+          end,
+        },
+      }
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -199,13 +221,15 @@ return {
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
       -- Ensure the servers and tools above are installed
-      --  To check the current status of installed tools and/or manually install
-      --  other tools, you can run
+      -- To check the current status of installed tools and/or manually install
+      -- other tools, you can run
       --    :Mason
       --
-      --  You can press `g?` for help in this menu.
-      require("mason").setup { ui = { border = "rounded" } }
-
+      -- You can press `g?` for help in this menu.
+      --
+      -- `mason` had to be setup earlier: to configure its options see the
+      -- `dependencies` table for `nvim-lspconfig` above.
+      --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
@@ -213,6 +237,8 @@ return {
       vim.cmd [[MasonToolsInstall]]
 
       require("mason-lspconfig").setup {
+        ensure_installed = {},
+        automatic_enable = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
