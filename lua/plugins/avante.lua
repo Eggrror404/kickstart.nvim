@@ -6,11 +6,11 @@ return {
     opts = {
       provider = "ollama",
       cursor_applying_provider = "ollama",
-      ollama = {
-        api_key_name = "",
-        endpoint = "http://127.0.0.1:11434",
-        model = "gemma3",
-        stream = true,
+      providers = {
+        ollama = {
+          endpoint = "http://127.0.0.1:11434",
+          model = "gemma3",
+        },
       },
       behavior = {
         enable_cursor_planning_mode = true,
