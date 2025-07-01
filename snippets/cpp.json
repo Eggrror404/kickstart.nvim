@@ -1,0 +1,16 @@
+{
+  "competitive programming boilerplate": {
+    "prefix": "cp",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "",
+      "int main() {",
+      "\tios::sync_with_stdio(0);",
+      "\tcin.tie(0);",
+      "\tcout.tie(0);",
+      "\t$0",
+      "}"
+    ]
+  }
+}

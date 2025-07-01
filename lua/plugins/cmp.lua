@@ -1,7 +1,7 @@
 local source_priority = {
-  snippets = 2,
+  snippets = 3,
   lsp = 1,
-  path = 3,
+  path = 2,
   buffer = 4,
 }
 
@@ -88,7 +88,7 @@ return { -- Autocompletion
       },
     },
 
-    snippets = { preset = "luasnip" },
+    -- snippets = { preset = "luasnip" },
 
     -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
     -- which automatically downloads a prebuilt binary when enabled.
