@@ -15,7 +15,6 @@ require "lazyfile"
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
   { import = "plugins" },
-  vim.g.enable_lsps and { import = "lsp" } or {},
 }, {
   defaults = {
     lazy = true,

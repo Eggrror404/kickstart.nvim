@@ -1,4 +1,5 @@
--- MOST FUNCTIONS HERE ARE FROM LAZY.NVIM <3
+-- MOST FUNCTIONS HERE ARE FROM LAZYVIM <3
+-- for vtsls stuff currently
 
 local M = { lsp = {} }
 

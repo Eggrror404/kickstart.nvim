@@ -49,6 +49,40 @@ return { -- Autoformat
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      lua = { "stylua" },
+
+      sh = { "shfmt" },
+      bash = { "shfmt" },
+      zsh = { "shfmt" },
+
+      c = { "clang-format" },
+      cpp = { "clang-format" },
+
+      python = { "ruff_format" },
+
+      ["javascript"] = { "prettierd" },
+      ["javascriptreact"] = { "prettierd" },
+      ["typescript"] = { "prettierd" },
+      ["typescriptreact"] = { "prettierd" },
+      ["vue"] = { "prettierd" },
+      ["css"] = { "prettierd" },
+      ["scss"] = { "prettierd" },
+      ["less"] = { "prettierd" },
+      ["html"] = { "prettierd" },
+      ["json"] = { "prettierd" },
+      ["jsonc"] = { "prettierd" },
+      ["yaml"] = { "prettierd" },
+      ["markdown"] = { "prettierd" },
+      ["markdown.mdx"] = { "prettierd" },
+      ["graphql"] = { "prettierd" },
+      ["handlebars"] = { "prettierd" },
+      ["svelte"] = { "prettierd" },
+      ["astro"] = { "prettierd" },
+    },
+    formatters = {
+      shfmt = {
+        prepend_args = { "-i", "2" },
+      },
     },
   },
   init = function()
