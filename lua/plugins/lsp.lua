@@ -173,11 +173,11 @@ return {
 
   {
     "mason-org/mason.nvim",
-    event = "LazyFile",
     opts = {},
   },
   {
     "mason-org/mason-lspconfig.nvim",
+    event = "LazyFile",
     opts = {},
     dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
   },
