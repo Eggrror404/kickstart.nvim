@@ -22,6 +22,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
+      if not opts.vtsls then
+        return
+      end
       vim.tbl_extend("keep", opts.vtsls.settings.vtsls, {
         tsserver = {
           globalPlugins = {

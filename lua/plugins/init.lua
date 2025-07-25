@@ -3,7 +3,13 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  { "tpope/vim-sleuth", event = "LazyFile" }, -- Detect tabstop and shiftwidth automatically
+  { -- Detect tabstop and shiftwidth automatically
+    "NMAC427/guess-indent.nvim",
+    event = "LazyFile",
+    config = function()
+      require("guess-indent").setup()
+    end,
+  },
 
   { "HiPhish/rainbow-delimiters.nvim", event = "LazyFile" },
 
@@ -128,7 +134,13 @@ return {
     ft = { "markdown", "Avante" },
   },
 
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
+
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.lint',
-  require "kickstart.plugins.autopairs",
+  -- require "kickstart.plugins.autopairs",
 }

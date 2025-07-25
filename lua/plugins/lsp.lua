@@ -171,7 +171,11 @@ return {
     end,
   },
 
-  { "mason-org/mason.nvim", opts = {} },
+  {
+    "mason-org/mason.nvim",
+    event = "LazyFile",
+    opts = {},
+  },
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {},
