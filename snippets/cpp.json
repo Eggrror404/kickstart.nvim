@@ -6,10 +6,10 @@
       "using namespace std;",
       "",
       "int main() {",
-      "\tios::sync_with_stdio(0);",
-      "\tcin.tie(0);",
-      "\tcout.tie(0);",
-      "\t$0",
+      "  ios::sync_with_stdio(0);",
+      "  cin.tie(0);",
+      "  $0",
+      "  return 0;",
       "}"
     ]
   }
