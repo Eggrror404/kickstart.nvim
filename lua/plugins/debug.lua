@@ -4,6 +4,9 @@ return {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
 
+    -- displays variable values
+    { "theHamsta/nvim-dap-virtual-text", opts = { virt_text_pos = "eol" } },
+
     -- provides default configurations
     "jay-babu/mason-nvim-dap.nvim",
     "mason-org/mason.nvim",
@@ -12,7 +15,6 @@ return {
     { "stevearc/overseer.nvim", opts = {} },
   },
   keys = {
-    -- Basic debugging keymaps, feel free to change to your liking!
     {
       "<F5>",
       function()
@@ -63,6 +65,55 @@ return {
       end,
       desc = "Debug: See last session result.",
     },
+    {
+      "<leader>Ds",
+      function()
+        require("dapui").float_element "scopes"
+      end,
+      desc = "Debug: Open scopes window",
+    },
+    {
+      "<leader>Dv",
+      function()
+        require("dapui").float_element "scopes"
+      end,
+      desc = "Debug: Open variable scopes window",
+    },
+    {
+      "<leader>Ds",
+      function()
+        require("dapui").float_element "stacks"
+      end,
+      desc = "Debug: Open threads and stack window",
+    },
+    {
+      "<leader>Dw",
+      function()
+        require("dapui").float_element "watch"
+      end,
+      desc = "Debug: Open watch window",
+    },
+    {
+      "<leader>Db",
+      function()
+        require("dapui").float_element "breakpoints"
+      end,
+      desc = "Debug: Open breakpoints window",
+    },
+    {
+      "<leader>Dr",
+      function()
+        require("dapui").float_element "repl"
+      end,
+      desc = "Debug: Open repl window",
+    },
+    {
+      "<leader>De",
+      function()
+        require("dapui").eval(vim.input "Expression> ")
+      end,
+      desc = "Debug: Evaluate expression",
+    },
   },
   config = function()
     local dap = require "dap"
@@ -92,27 +143,28 @@ return {
       ensure_installed = {},
     }
 
-    -- Dap UI setup
-    -- For more information, see |:help nvim-dap-ui|
+    ---@diagnostic disable:missing-fields
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
-      controls = {
-        icons = {
-          pause = "⏸",
-          play = "▶",
-          step_into = "⏎",
-          step_over = "⏭",
-          step_out = "⏮",
-          step_back = "b",
-          run_last = "▶▶",
-          terminate = "⏹",
-          disconnect = "⏏",
+      controls = { element = "scopes" },
+      floating = { border = "rounded" },
+      layouts = {
+        {
+          elements = {
+            {
+              id = "console",
+              size = 0.5,
+            },
+            {
+              id = "scopes",
+              size = 0.5,
+            },
+          },
+          position = "bottom",
+          size = 10,
         },
       },
     }
+    ---@diagnostic enable:missing-fields
 
     dap.listeners.after.event_initialized["dapui_config"] = dapui.open
     dap.listeners.before.event_terminated["dapui_config"] = dapui.close

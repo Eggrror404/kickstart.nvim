@@ -20,6 +20,7 @@ return {
       { "<leader>l", group = "LSP / Code", mode = { "n", "x" } },
       { "<leader>s", group = "Search" },
       { "<leader>u", group = "Toggle" },
+      { "<leader>D", group = "Debug" },
     },
   },
 }
