@@ -38,3 +38,7 @@ map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagnostic popup
 -- Split
 map("n", "<leader>-", "<cmd>split<cr>", { desc = "Horizontal split" })
 map("n", "<leader>|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
+
+-- Copy to & paste from system keyboard
+map({ "n", "v" }, "<leader>y", '"+y')
+map({ "n", "v" }, "<leader>p", '"+p')

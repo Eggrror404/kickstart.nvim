@@ -1,10 +1,3 @@
-local source_priority = {
-  snippets = 3,
-  lsp = 1,
-  path = 2,
-  buffer = 4,
-}
-
 return { -- Autocompletion
   "saghen/blink.cmp",
   event = "VimEnter",
@@ -75,14 +68,6 @@ return { -- Autocompletion
     fuzzy = {
       implementation = "lua",
       sorts = {
-        function(a, b)
-          local a_priority = source_priority[a.source_id]
-          local b_priority = source_priority[b.source_id]
-          if a_priority ~= b_priority then
-            return a_priority < b_priority
-          end
-        end,
-        -- defaults
         "score",
         "sort_text",
       },
